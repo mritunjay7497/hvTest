@@ -12,7 +12,7 @@ pd.set_option('display.width', None)    # get full width
 df = pd.read_csv("data_modified_1.csv")
 
 
-# Drop the duplicates entry
+# Drop the duplicates entry and aggregate the dataframe rows in list
 non_dups = df.drop_duplicates().groupby(
     ["Lab Number", "panel_code", 'Parameter Code']).agg(list)
 
