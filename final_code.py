@@ -36,13 +36,16 @@ def recur_dictify(frame):
     d = {k: recur_dictify(g.iloc[:, 1:]) for k, g in grouped}
     return d
 
-
+# Get nested dictionary from excel
 required_format = recur_dictify(df.drop_duplicates())
 
+# Get JSON document from nested dictionary
 json.dumps(required_format, ensure_ascii=False)
 
+# Get the list of lab numbers, to be used as keys
 lab_number_list = required_format.keys()
 
+# save each patient records in their separate json file
 for keys in lab_number_list:
     with open(str(keys)+'.json', 'w', encoding='utf8') as json_file:
         json.dump(required_format[keys], json_file, ensure_ascii=False)
